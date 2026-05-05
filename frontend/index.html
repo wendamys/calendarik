@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Календарь с друзьями — автоподсветка будущих дней</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-top">
+        <div>
+          <h1>📅 Календарь с друзьями</h1>
+          <p>Зеленым — свободен, красным — занят (пересечение), желтым — дела вне интервала / без времени</p>
+        </div>
+        <div class="user-switcher">
+          <div class="current-user-info">
+            <span class="user-avatar">&#129418;</span>
+            <span id="currentUserName">Загрузка...</span>
+          </div>
+          <button class="switch-user-btn" id="switchUserBtn">🔄 Сменить пользователя</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="search-panel">
+      <div class="search-group">
+        <div class="field">
+          <label>⏰ Время от</label>
+          <input type="time" id="searchTimeFrom" value="00:00">
+        </div>
+        <div class="field">
+          <label>⏰ Время до</label>
+          <input type="time" id="searchTimeTo" value="23:59">
+        </div>
+        <button class="search-btn" id="applySearchBtn">🔍 Обновить подсветку</button>
+      </div>
+      <div class="legend">
+        <span><i class="color-badge green-bg"></i> свободен</span>
+        <span><i class="color-badge red-bg"></i> занят (пересечение)</span>
+        <span><i class="color-badge yellow-bg"></i> дела вне интервала / без времени</span>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="calendar-section">
+        <div class="calendar-nav">
+          <button class="nav-btn" id="prevMonthBtn">← Назад</button>
+          <div class="month-year" id="monthYearDisplay"></div>
+          <button class="nav-btn" id="nextMonthBtn">Вперед →</button>
+        </div>
+        <table class="calendar-table" id="calendarTable">
+          <thead>
+            <tr>
+              <th>Пн</th><th>Вт</th><th>Ср</th><th>Чт</th><th>Пт</th><th>Сб</th><th>Вс</th>
+            </tr>
+          </thead>
+          <tbody id="calendarBody"></tbody>
+        </table>
+      </div>
+
+      <div class="friends-panel">
+        <div class="friends-header">
+          <h2>&#129418; Друзья</h2>
+          <button class="add-friend-btn" id="addFriendBtn" style="display: none;">+ Добавить друга</button>
+        </div>
+        <div class="add-friend-form" id="addFriendForm" style="display: none;">
+          <input type="text" id="friendNameInput" placeholder="Имя друга">
+          <input type="color" id="friendColorInput" value="#4f46e5">
+          <div class="form-buttons">
+            <button class="btn-save" id="saveFriendBtn">Сохранить</button>
+            <button class="btn-cancel" id="cancelFriendBtn">Отмена</button>
+          </div>
+        </div>
+        <div class="friends-list" id="friendsList"></div>
+        <div class="active-friend-info" id="activeFriendInfo" style="display: none;">
+          <div class="active-friend-header">
+            <span>📌 Выбран: <strong id="activeFriendName"></strong></span>
+            <button class="btn-deselect" id="deselectFriendBtn">✕</button>
+          </div>
+          <p class="hint">События этого друга отображаются на календаре</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      💡 Кликни на день → добавь событие. Можно указать время или оставить без времени. Подсветка для будущих дней.
+    </div>
+    <footer>Все данные сохраняются в браузере</footer>
+  </div>
+
+  <!-- Модальное окно событий -->
+  <div id="eventModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 id="modalDateTitle"></h3>
+        <button class="close-modal" id="closeModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="friend-selector">
+          <label>&#129418; Для друга:</label>
+          <select id="modalFriendSelect">
+            <option value="me">Я</option>
+          </select>
+        </div>
+        <div id="modalEventsList"></div>
+        <div class="add-event-modal">
+          <input type="text" id="modalEventTitle" placeholder="Название события">
+          <div class="time-row">
+            <input type="time" id="modalEventStart" placeholder="Начало">
+            <input type="time" id="modalEventEnd" placeholder="Конец (необязательно)">
+          </div>
+          <button id="modalAddEventBtn">➕ Добавить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно смены пользователя -->
+  <div id="switchUserModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3>&#129418; Управление пользователями</h3>
+        <button class="close-modal" id="closeSwitchUserModalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="user-list" id="userListModal"></div>
+        <div class="add-user-section">
+          <h4>➕ Добавить нового пользователя</h4>
+          <input type="text" id="newUserFirstName" placeholder="Имя">
+          <input type="text" id="newUserLastName" placeholder="Фамилия">
+          <button id="addNewUserBtn">Добавить пользователя</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/websocket.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/friends.js"></script>
+  <script src="js/users.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

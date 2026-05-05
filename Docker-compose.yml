@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # База данных
+  db:
+    image: postgres:15-alpine
+    container_name: calendar_db
+    environment:
+      POSTGRES_USER: calendar_user
+      POSTGRES_PASSWORD: calendar_pass
+      POSTGRES_DB: calendar_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U calendar_user -d calendar_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Бэкенд
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: calendar_backend
+    environment:
+      DATABASE_URL: postgresql://calendar_user:calendar_pass@db:5432/calendar_db
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  # Фронтенд
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: calendar_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

@@ -1,0 +1,1164 @@
+* {
+  box-sizing: border-box;
+  font-family: system-ui, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background: #eef2ff;
+  margin: 0;
+  padding: 24px;
+  color: #0f172a;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 2rem;
+  box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.header {
+  background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%);
+  padding: 1.5rem 2rem;
+  color: white;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.header h1 {
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+  font-size: 1.9rem;
+}
+
+.header p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.user-switcher {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.8rem 1.2rem;
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  min-width: fit-content;
+}
+
+.current-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-weight: 500;
+}
+
+.user-avatar {
+  font-size: 1.5rem;
+}
+
+.switch-user-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.switch-user-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Панель поиска */
+.search-panel {
+  background: #ffffff;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #eef2ff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  justify-content: space-between;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.search-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.field input {
+  padding: 0.5rem 1rem;
+  border-radius: 60px;
+  border: 1px solid #e2e8f0;
+  background: #fefefe;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  width: 130px;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.search-btn {
+  background: linear-gradient(105deg, #4f46e5 0%, #6366f1 100%);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 60px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.2);
+}
+
+.search-btn:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(105deg, #4338ca, #4f46e5);
+}
+
+.legend {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.7rem;
+  background: #f8fafc;
+  padding: 0.4rem 1.2rem;
+  border-radius: 60px;
+}
+
+.legend .color-badge {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.green-bg { background-color: #bbf7d0; border: 1px solid #22c55e; }
+.red-bg { background-color: #fee2e2; border: 1px solid #ef4444; }
+.yellow-bg { background-color: #fef9c3; border: 1px solid #eab308; }
+
+/* Основной контейнер */
+.main-content {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.calendar-section {
+  flex: 1;
+  padding: 0;
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.month-year {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: #eef2ff;
+  padding: 0.3rem 1.2rem;
+  border-radius: 60px;
+}
+
+.nav-btn {
+  background: white;
+  border: 1px solid #cbd5e1;
+  padding: 0.4rem 1.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.nav-btn:hover {
+  background: #f1f5f9;
+}
+
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.calendar-table th {
+  padding: 0.8rem 0.2rem;
+  background: #f8fafc;
+  font-weight: 600;
+  color: #334155;
+  text-align: center;
+}
+
+.calendar-table td {
+  border: 1px solid #eef2ff;
+  text-align: center;
+  padding: 0.5rem 0;
+  height: 85px;
+  width: 14%;
+  cursor: pointer;
+  transition: 0.1s;
+  background: white;
+}
+
+.calendar-table td:hover {
+  background: #fef9c3;
+}
+
+.day-number {
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: inline-block;
+  background: #f8fafc;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 30px;
+  margin-bottom: 5px;
+}
+
+.event-dot {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 3px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #f97316;
+  border-radius: 10px;
+}
+
+.other-month {
+  background-color: #fafcff;
+  color: #94a3b8;
+}
+
+/* Цвета поиска */
+.search-green { background-color: #bbf7d0 !important; }
+.search-red { background-color: #fee2e2 !important; }
+.search-yellow { background-color: #fef9c3 !important; }
+
+/* Панель друзей */
+.friends-panel {
+  width: 320px;
+  min-width: 320px;
+  background: #f8fafc;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  height: fit-content;
+  border: 1px solid #e2e8f0;
+}
+
+.friends-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.friends-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1e293b;
+}
+
+.add-friend-btn {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.add-friend-btn:hover {
+  background: #4338ca;
+}
+
+.add-friend-form {
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+}
+
+.add-friend-form input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 0.5rem;
+}
+
+.add-friend-form input[type="color"] {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-save {
+  flex: 1;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-save:hover {
+  background: #4338ca;
+}
+
+.btn-cancel {
+  flex: 1;
+  background: #e2e8f0;
+  color: #475569;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #cbd5e1;
+}
+
+.friends-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.friend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem;
+  background: white;
+  border-radius: 1rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.friend-item:hover {
+  border-color: #4f46e5;
+  transform: translateX(4px);
+}
+
+.friend-item.active {
+  border-color: #4f46e5;
+  background: #eef2ff;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.2);
+}
+
+.friend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+
+.friend-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.friend-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #1e293b;
+}
+
+.friend-events-count {
+  font-size: 0.7rem;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.delete-friend-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.friend-item:hover .delete-friend-btn {
+  opacity: 1;
+}
+
+.delete-friend-btn:hover {
+  background: #fee2e2;
+}
+
+.active-friend-info {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+
+.active-friend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.btn-deselect {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.btn-deselect:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.hint {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Модальное окно */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.modal-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-container {
+  background: white;
+  width: 90%;
+  max-width: 480px;
+  border-radius: 2rem;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.2s;
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1);
+}
+
+.modal-header {
+  background: #4f46e5;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.close-modal:hover {
+  opacity: 0.8;
+}
+
+.modal-body {
+  padding: 1.5rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.friend-selector {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.friend-selector label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.friend-selector select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  background: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.event-item-modal {
+  background: #f8fafc;
+  border-radius: 1rem;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-time-range {
+  font-size: 0.7rem;
+  color: #475569;
+  margin-top: 4px;
+}
+
+.event-friend-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  background: #e0e7ff;
+  color: #4f46e5;
+  font-weight: normal;
+}
+
+.delete-event-modal {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.delete-event-modal:hover {
+  color: #dc2626;
+}
+
+.add-event-modal input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 60px;
+  border: 1px solid #cbd5e1;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.add-event-modal input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.time-row {
+  display: flex;
+  gap: 8px;
+}
+
+.time-row input {
+  width: 50%;
+}
+
+.add-event-modal button {
+  width: 100%;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 60px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+
+.add-event-modal button:hover {
+  background: #4338ca;
+}
+
+.empty-events {
+  text-align: center;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Стили для модального окна смены пользователя */
+.user-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.user-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.user-list-item:hover {
+  border-color: #4f46e5;
+  background: #f8fafc;
+}
+
+.user-list-item.active {
+  border-color: #4f46e5;
+  background: #eef2ff;
+  cursor: default;
+}
+
+.user-list-item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.user-list-item-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #4f46e5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.user-list-item-name {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.user-list-item-badge {
+  background: #4f46e5;
+  color: white;
+  padding: 0.2rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.add-user-section {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+.add-user-section h4 {
+  margin: 0 0 0.8rem;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.add-user-section input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.add-user-section input:focus {
+  outline: none;
+  border-color: #4f46e5;
+}
+
+.add-user-section button {
+  width: 100%;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-user-section button:hover {
+  background: #4338ca;
+}
+
+/* Toast уведомления */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #1e293b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 40px;
+  z-index: 1100;
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+footer {
+  text-align: center;
+  font-size: 0.7rem;
+  padding: 1rem;
+  color: #64748b;
+  border-top: 1px solid #e2e8f0;
+}
+
+.note {
+  font-size: 0.7rem;
+  padding: 0 2rem 1rem 2rem;
+  color: #475569;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .friends-panel {
+    width: 100%;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 12px;
+  }
+
+  .header {
+    padding: 1rem 1.5rem;
+  }
+
+  .header-top {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+  }
+
+  .user-switcher {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .search-panel {
+    padding: 0.8rem 1rem;
+    flex-direction: column;
+  }
+
+  .search-group {
+    width: 100%;
+  }
+
+  .field input {
+    width: 100%;
+  }
+
+  .legend {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .calendar-section {
+    padding: 1rem;
+  }
+
+  .calendar-table td {
+    height: 60px;
+    padding: 0.3rem 0;
+  }
+
+  .day-number {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    font-size: 0.8rem;
+  }
+
+  .month-year {
+    font-size: 1.2rem;
+  }
+}
+/* Тёмная тема */
+body.dark-theme {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body.dark-theme .container {
+  background: #1e293b;
+  box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .search-panel {
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+}
+
+body.dark-theme .calendar-table th {
+  background: #334155;
+  color: #94a3b8;
+}
+
+body.dark-theme .calendar-table td {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-theme .calendar-table td:hover {
+  background: #334155;
+}
+
+body.dark-theme .day-number {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+body.dark-theme .other-month {
+  background: #0f172a;
+  color: #475569;
+}
+
+body.dark-theme .friends-panel {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark-theme .friend-item {
+  background: #334155;
+}
+
+body.dark-theme .friend-item.active {
+  background: #1e3a5f;
+  border-color: #4f46e5;
+}
+
+body.dark-theme .friend-name {
+  color: #e2e8f0;
+}
+
+body.dark-theme .friends-header h2 {
+  color: #e2e8f0;
+}
+
+body.dark-theme .modal-container {
+  background: #1e293b;
+}
+
+body.dark-theme .modal-body {
+  color: #e2e8f0;
+}
+
+body.dark-theme .event-item-modal {
+  background: #334155;
+}
+
+body.dark-theme .search-green {
+  background-color: rgba(6, 78, 59, 0.56) !important;
+}
+
+body.dark-theme .search-red {
+  background-color: rgba(131, 43, 43, 0.5) !important;
+}
+
+body.dark-theme .search-yellow {
+  background-color: #713f12 !important;
+}
+
+body.dark-theme .month-year {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+body.dark-theme .nav-btn {
+  background: #334155;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+body.dark-theme .legend {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+body.dark-theme .note,
+body.dark-theme footer {
+  color: #94a3b8;
+}
+
+body.dark-theme .empty-events {
+  background: #334155;
+  color: #94a3b8;
+}
+
+body.dark-theme .user-list-item {
+  background: #334155;
+  border-color: #475569;
+}
+
+body.dark-theme .user-list-item.active {
+  background: #1e3a5f;
+}
+
+body.dark-theme .user-list-item-name {
+  color: #e2e8f0;
+}
+
+body.dark-theme .friend-events-count {
+  background: #475569;
+  color: #cbd5e1;
+}
+
+/* ===== ПОЛЯ ВВОДА ===== */
+
+/* Поля в панели поиска */
+body.dark-theme .field label {
+  color: #cbd5e1;
+}
+
+body.dark-theme .field input {
+  background: #334155;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+body.dark-theme .field input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+body.dark-theme .field input[type="time"] {
+  color-scheme: dark;
+}
+
+body.dark-theme .field input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+body.dark-theme .field input::placeholder {
+  color: #64748b;
+}
+
+/* Поля в модальном окне добавления события */
+body.dark-theme .add-event-modal input {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-theme .add-event-modal input:focus {
+  border-color: #4f46e5 !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+body.dark-theme .add-event-modal input[type="time"] {
+  color-scheme: dark;
+}
+
+body.dark-theme .add-event-modal input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+body.dark-theme .add-event-modal input::placeholder {
+  color: #64748b !important;
+}
+
+/* Исправление автозаполнения */
+body.dark-theme .add-event-modal input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #334155 inset !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+
+/* Селектор друга в модальном окне */
+body.dark-theme .friend-selector label {
+  color: #cbd5e1;
+}
+
+body.dark-theme .friend-selector select {
+  background: #334155;
+  color: #e2e8f0;
+  border-color: #475569;
+}
+
+/* Поиск */
+body.dark-theme #searchEventInput,
+body.dark-theme #searchFriendInput {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-theme #searchEventInput:focus,
+body.dark-theme #searchFriendInput:focus {
+  background: #334155 !important;
+  border-color: #4f46e5 !important;
+  color: #e2e8f0 !important;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+body.dark-theme #searchEventInput::placeholder,
+body.dark-theme #searchFriendInput::placeholder {
+  color: #64748b !important;
+}
+
+body.dark-theme #searchEventInput:-webkit-autofill,
+body.dark-theme #searchFriendInput:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #334155 inset !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+
+/* Поля в модальном окне смены пользователя */
+body.dark-theme .add-user-section h4 {
+  color: #cbd5e1;
+}
+
+body.dark-theme .add-user-section input {
+  background: #334155;
+  border-color: #475569;
+  color: #e2e8f0;
+}
+
+body.dark-theme .add-user-section input:focus {
+  border-color: #4f46e5;
+  outline: none;
+}
+
+body.dark-theme .add-user-section input::placeholder {
+  color: #64748b;
+}
+
+/* Кнопка очистки поиска */
+body.dark-theme .search-container button {
+  background: #334155;
+  border-color: #475569;
+  color: #94a3b8;
+}
+
+body.dark-theme .search-container button:hover {
+  background: #475569;
+}
+
+/* Все select'ы */
+body.dark-theme select {
+  background: #334155;
+  color: #e2e8f0;
+  border-color: #475569;
+}
+
+body.dark-theme select option {
+  background: #1e293b;
+  color: #e2e8f0;
+}
+
+/* Валидация */
+body.dark-theme .validation-error {
+  color: #fca5a5 !important;
+}
